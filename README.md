@@ -1,6 +1,6 @@
 # security-workflows
 
-The approved security pipelines for Attestra, rendered by `aap pipelines export`.
+The approved security pipelines for FortProof, rendered by `aap pipelines export`.
 Application repositories call these workflows with one small file (`aap pipelines caller`); each workflow scans,
 writes an evidence manifest, signs it, and uploads it as an `aap-evidence-*` artifact the platform pulls and verifies.
 

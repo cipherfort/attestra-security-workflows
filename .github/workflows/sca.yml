@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-# Attestra shipped pipeline: Dependency vulnerabilities (OSV-Scanner).
+# FortProof shipped pipeline: Dependency vulnerabilities (OSV-Scanner).
 # Source: pipelines/github/ in the platform repository. Do not edit the copy in your security-workflows repository by
 # hand: change the source, re-run `aap pipelines export`, review, release, and approve the new commit SHA
 # (`aap pipelines approve`). Evidence from any other commit is rejected (UNAPPROVED_WORKFLOW_REF).
@@ -52,7 +52,7 @@ jobs:
           cat > "$RUNNER_TEMP/aap_evidence.py" <<'AAP_EVIDENCE_EOF'
           #!/usr/bin/env python3
           # SPDX-License-Identifier: Apache-2.0
-          """aap-evidence: write an evidence manifest for Attestra inside a CI job.
+          """aap-evidence: write an evidence manifest for FortProof inside a CI job.
 
           Standard library only (it runs on any runner with Python 3.9+). `aap pipelines export` inlines this file into every
           shipped workflow, so approving a workflow's commit SHA (config/trusted-producers.yaml) also approves this code.
@@ -81,7 +81,7 @@ jobs:
           from pathlib import Path
 
           SCHEMA_VERSION = "1.0"
-          PREDICATE_TYPE = "https://cipherfort.github.io/attestra/attestation/evidence/v1"
+          PREDICATE_TYPE = "https://fortproof.dev/attestation/evidence/v1"
           MANIFEST = "evidence-manifest.json"
           MAX_FILES = 50
           MAX_FILE_BYTES = 200 * 1024 * 1024
@@ -382,7 +382,7 @@ jobs:
         uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
         with:
           subject-path: ${{ runner.temp }}/aap-evidence/evidence-manifest.json
-          predicate-type: https://cipherfort.github.io/attestra/attestation/evidence/v1
+          predicate-type: https://fortproof.dev/attestation/evidence/v1
           predicate-path: ${{ runner.temp }}/aap-evidence/evidence-manifest.json
       - name: Upload the evidence bundle
         if: ${{ !cancelled() && steps.manifest.outcome == 'success' }}
